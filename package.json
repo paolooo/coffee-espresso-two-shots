@@ -1,0 +1,30 @@
+{
+  "name": "coffee-espresso-two-shots",
+  "preferGlobal": true,
+  "version": "0.0.1",
+  "author": "Nino Paolo Amarillento <oo70vd@gmail.com>",
+  "description": "Converting HAML and SaSS template to coffee-template and coffee-stylesheet respectively.",
+  "keywords": [
+    "coffee-template",
+    "coffee-stylesheet",
+    "coffee-shop",
+    "haml",
+    "sass"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.8.15"
+  },
+  "devDependencies": {
+    "chai": ">=1.4.0",
+    "mocha": ">=1.7.4",
+    "coffee-script": ">=1.4.0"
+  },
+  "scripts": {
+    "pretest": "coffee -o js coffee/coffee-espresso-two-shots.coffee",
+    "test": "mocha --compilers coffee:coffee-script -R spec --ui bdd --colors test/test.coffee"
+  }
+}
