@@ -8,6 +8,7 @@
       o = o || {};
       this.newline = o.newline || "\n";
       this.coffeeStyle = '';
+      this._comment = false;
       this.convert = function(s) {
         var self;
         this.lines = s.split(/[\n|\r|\r\n]+/);
@@ -18,11 +19,14 @@
           }
           return self.coffeeStyle += self._convert(v.replace(/\s+$/, ''));
         });
-        return this.coffeeStyle;
+        return this.coffeeStyle.replace(/[\n|\r|\r\n]$/, '');
       };
       this._convert = function(s) {
+        if (this._isImport(s)) {
+          return s.replace(/\@import\s+/, '#=require ../') + (".css.coffee" + this.newline);
+        }
         if (this._isComment(s)) {
-          return s + this.newline;
+          return s.replace(/\/\*/, '//').replace(/\*/, '//') + this.newline;
         }
         if (this._isSelector(s)) {
           return this._selector(s);
@@ -33,8 +37,18 @@
       this._isSelector = function(s) {
         return s.search(/\:\s+[\w\"\'\#\d]+/) === -1 && s.search(/\+/) === -1;
       };
+      this._isImport = function(s) {
+        return s.search(/^@/) > -1;
+      };
       this._isComment = function(s) {
-        return s.search(/\/+|\*/) > -1;
+        if (s.search(/\/+\**/) > -1) {
+          this._comment = true;
+        } else if (s.search(/^\s*\*/) > -1 && this._comment) {
+          this._comment = true;
+        } else {
+          this._comment = false;
+        }
+        return this._comment;
       };
       this._selector = function(s) {
         return s.replace(/(\s*)(.*)$/, "$1s '$2', ->" + this.newline);

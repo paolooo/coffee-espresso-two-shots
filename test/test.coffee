@@ -39,7 +39,6 @@ s 'body', ->
       s 'table', ->
         s 'th:first, td', ->
           border_bottom '1px solid #F00'
-
       """
 
     it 'can convert mixin', ->
@@ -54,20 +53,26 @@ s 'body.users_dashboard #stage.module-08', ->
   s '.slide', ->
     sprite_bg general, 'bg-blank-slide'
     height '400px'
-
       """
 
     it 'can ignore this types ("/* and //") comments only', ->
       # TODO:
       # /* several lines long.
       #  * since it uses the CSS comment syntax
-      # it will appear in the CSS output. */
+      # * it will appear in the CSS output.
       template = """
 // comment 2
 /* comment 3
       """
       output = """
 // comment 2
-/* comment 3
+// comment 3
+      """
 
+    it 'can convert @import', ->
+      template = """
+@import partials/globals
+      """
+      output = """
+#=require ../partials/globals.css.coffee
       """
