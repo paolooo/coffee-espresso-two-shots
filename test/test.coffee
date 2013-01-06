@@ -13,7 +13,6 @@ describe 'Coffee Espresso Two Shots', ->
       result = engine.render template
       assert.equal result, output, 'ok'
 
-
     it 'can convert simple sass code, without mixins', ->
       template = """
 body
