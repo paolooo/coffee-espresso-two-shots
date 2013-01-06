@@ -11,6 +11,10 @@
     "haml",
     "sass"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/paolooo/coffee-espresso-two-shots.git"
+  },
   "directories": {
     "test": "test"
   },

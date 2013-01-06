@@ -54,13 +54,13 @@
         return s.replace(/(\s*)(.*)$/, "$1s '$2', ->" + this.newline);
       };
       this._property = function(s) {
-        var c, p;
+        var c;
         if (s.search(/\+/) > -1) {
-          return "" + (s.replace(/\"/g, '\'').replace(/\+/, '').replace(/\(/, ' ').replace(/\$/, '').replace(/\)/, '').replace(/\-/, '_')) + this.newline;
+          c = s.split('(');
+          return "" + (c[0].replace(/\+/, '').replace(/\-/g, '_')) + " " + (c[1].replace(/\"/g, '\'').replace(/\(/, ' ').replace(/\$/, '').replace(/\)/, '')) + this.newline;
         } else {
           c = s.split(':');
-          p = c[0].replace('-', '_');
-          return "" + p + " '" + (c[1].replace(/^\s*/, '').replace(/\'/g, '\"')) + "'" + this.newline;
+          return "" + (c[0].replace('\-', '_')) + " '" + (c[1].replace(/^\s*/, '').replace(/\'/g, '\"')) + "'" + this.newline;
         }
       };
     }

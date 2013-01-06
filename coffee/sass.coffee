@@ -33,11 +33,11 @@ class SaSS
     @_property = (s) ->
       # is mixin
       if s.search(/\+/) > -1
-        return "#{s.replace(/\"/g,'\'').replace(/\+/,'').replace(/\(/,' ').replace(/\$/,'').replace(/\)/,'').replace(/\-/,'_')}#{@newline}"
+        c = s.split '('
+        return "#{c[0].replace(/\+/,'').replace(/\-/g,'_')} #{c[1].replace(/\"/g,'\'').replace(/\(/,' ').replace(/\$/,'').replace(/\)/,'')}#{@newline}"
       else
         c = s.split ':'
-        p = c[0].replace '-', '_'
-        return "#{p} '#{c[1].replace(/^\s*/,'').replace /\'/g, '\"'}'#{@newline}"
+        return "#{c[0].replace('\-','_')} '#{c[1].replace(/^\s*/,'').replace(/\'/g,'\"')}'#{@newline}"
 
 exports.getSaSS = (o)->
   new SaSS(o)
