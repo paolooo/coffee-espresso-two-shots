@@ -37,7 +37,7 @@ class SaSS
         return "#{c[0].replace(/\+/,'').replace(/\-/g,'_')} #{c[1].replace(/\"/g,'\'').replace(/\(/,' ').replace(/\$/,'').replace(/\)/,'')}#{@newline}"
       else
         c = s.split ':'
-        return "#{c[0].replace('\-','_')} '#{c[1].replace(/^\s*/,'').replace(/\'/g,'\"')}'#{@newline}"
+        return "#{c[0].replace(/\-/,'_')} '#{c[1].replace(/^\s*/,'').replace(/\'/g,'\"')}'#{@newline}"
 
 exports.getSaSS = (o)->
   new SaSS(o)
