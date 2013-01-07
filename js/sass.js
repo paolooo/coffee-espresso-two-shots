@@ -6,29 +6,30 @@
 
     function SaSS(o) {
       o = o || {};
-      this.newline = o.newline || "\n";
+      this.newline = o.newline || '\n';
       this.debug = o.debug || false;
       this.coffeeStyle = '';
       this._comment = false;
-      this._isPrevSelectWithComma = false;
+      this._isPrevSelectorWithComma = false;
       this.convert = function(s) {
         var self;
-        this.lines = s.split(/[\n|\r|\r\n]+/);
+        s = s.trim().replace(/[\r\n|\r|\n]{2}/, this.newline + '[:newline]' + this.newline).replace(/\r\n/, '');
+        this.lines = s.split(/[\n]/);
         self = this;
         this.lines.forEach(function(v, k, a) {
-          if (!v.trim()) {
-            return;
+          var r;
+          if (v === '[:newline]' || v === '') {
+            return self.coffeeStyle += self.debug ? '#' + self.newline : self.newline;
+          } else {
+            r = self._convert(v.replace(/\s+$/, ''));
+            return self.coffeeStyle += self.debug ? '#' + r : r;
           }
-          return self.coffeeStyle += self._convert(v.replace(/\s+$/, ''));
         });
-        return this.coffeeStyle.replace(/[\n|\r|\r\n]$/, '');
+        return this.coffeeStyle.trim();
       };
       this._convert = function(s) {
-        if (o.debug) {
-          s = '#' + s;
-        }
         if (this._isImport(s)) {
-          return s.replace(/\@import\s+/, '#=require ../') + (".css.coffee" + this.newline);
+          return s.replace(/\@import\s+/, '#=require ../').replace(/partials\//, 'partials\/_') + (".css.coffee" + this.newline);
         }
         if (this._isComment(s)) {
           return s.replace(/\/+\**/, '#').replace(/\*/, '#') + this.newline;
@@ -56,7 +57,20 @@
         return this._comment;
       };
       this._selector = function(s) {
-        return s.replace(/(\s*)(.*)$/, "$1s '$2', ->" + this.newline);
+        var r;
+        if (-1 < s.search(/\,$/)) {
+          r = !this._isPrevSelectorWithComma ? s.replace(/(\s*)(.*)$/, "$1s '$2") : s.replace(/\s*(.*)$/, " $1");
+          this._isPrevSelectorWithComma = true;
+          return r;
+        } else if (s === '') {
+          return this.newline;
+        } else {
+          if (this._isPrevSelectorWithComma) {
+            this._isPrevSelectorWithComma = false;
+            return s.replace(/\s*(.*)$/, " $1', ->" + this.newline);
+          }
+          return s.replace(/(\s*)(.*)$/, "$1s '$2', ->" + this.newline);
+        }
       };
       this._property = function(s) {
         var c;
@@ -75,6 +89,7 @@
   })();
 
   exports.getSaSS = function(o) {
+    o = o || {};
     return new SaSS(o);
   };
 

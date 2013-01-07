@@ -1,12 +1,13 @@
 fs = require 'fs'
 assert = require('chai').assert
-CoffeeEspressoTwoShots = require '../js/coffee-espresso-two-shots.js'
+CoffeeEspressoTwoShots = require('../js/coffee-espresso-two-shots.js').getCoffeeEspressoTwoShots()
 
 engine = output = template = null
 describe 'Coffee Espresso Two Shots', ->
+  before ->
+    engine = CoffeeEspressoTwoShots
   beforeEach ->
     template = output = ""
-    engine = new CoffeeEspressoTwoShots
     
   describe 'SaSS test', ->
     afterEach ->
@@ -34,6 +35,7 @@ s 'body', ->
   font_size '100%'
   s '#wrapper', ->
     background_color '#F00'
+
     s '.container', ->
       s 'table', ->
         s 'th:first, td', ->
@@ -75,5 +77,17 @@ s 'body.users_dashboard #stage.module-08', ->
 @import partials/globals
       """
       output = """
-#=require ../partials/globals.css.coffee
+#=require ../partials/_globals.css.coffee
+      """
+
+    it 'can convert multi-line selector format', ->
+      template = """
+body.users_dashboard .module-07,
+body.users_dashboard .module-07 table,
+body.users_dashboard .module-07 th
+  font-size: 13px
+      """
+      output = """
+s 'body.users_dashboard .module-07, body.users_dashboard .module-07 table, body.users_dashboard .module-07 th', ->
+  font_size '13px'
       """

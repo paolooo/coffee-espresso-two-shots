@@ -1,22 +1,25 @@
 class SaSS
   constructor: (o)->
     o = o or {}
-    @newline = o.newline or "\n"
+    @newline = o.newline or '\n'
     @debug = o.debug or false
 
     @coffeeStyle = ''
     @_comment = false
-    @_isPrevSelectWithComma = false
+    @_isPrevSelectorWithComma = false
     @convert = (s) ->
-      @lines = s.split /[\n|\r|\r\n]+/
+      s = s.trim().replace(/[\r\n|\r|\n]{2}/, @newline+'[:newline]'+@newline).replace(/\r\n/,'')
+      @lines = s.split /[\n]/
       self = @
       @lines.forEach (v,k,a) ->
-        return unless v.trim() # exit if empty
-        self.coffeeStyle += self._convert v.replace /\s+$/, ''
-      @coffeeStyle.replace /[\n|\r|\r\n]$/, ''
+        if v is '[:newline]' or v is ''
+          self.coffeeStyle += if self.debug then '#' + self.newline else self.newline
+        else
+          r = self._convert v.replace /\s+$/, ''
+          self.coffeeStyle += if self.debug then '#' + r else r
+      @coffeeStyle.trim()
     @_convert = (s) ->
-      s = '#'+s if o.debug
-      return s.replace(/\@import\s+/,'#=require ../') + ".css.coffee#{@newline}" if @_isImport s # @import
+      return s.replace(/\@import\s+/,'#=require ../').replace(/partials\//, 'partials\/_') + ".css.coffee#{@newline}" if @_isImport s # @import
       return s.replace(/\/+\**/,'#').replace(/\*/,'#') + @newline if @_isComment s # ignore comment
       return if @_isSelector s then @_selector s else @_property s
     @_isSelector = (s) ->
@@ -33,7 +36,17 @@ class SaSS
         @_comment = false
       @_comment
     @_selector = (s) ->
-      s.replace /(\s*)(.*)$/, "$1s '$2', ->#{@newline}"
+      if -1 < s.search /\,$/
+        r = unless @_isPrevSelectorWithComma then s.replace /(\s*)(.*)$/, "$1s '$2" else s.replace /\s*(.*)$/, " $1"
+        @_isPrevSelectorWithComma = true
+        r
+      else if s is ''
+        return @newline
+      else
+        if @_isPrevSelectorWithComma
+          @_isPrevSelectorWithComma = false
+          return s.replace /\s*(.*)$/, " $1', ->#{@newline}"
+        return s.replace /(\s*)(.*)$/, "$1s '$2', ->#{@newline}"
     @_property = (s) ->
       # is mixin
       if s.search(/\+/) > -1
@@ -44,4 +57,5 @@ class SaSS
         return "#{c[0].replace(/\-/g,'_')} '#{c[1].replace(/^\s*/,'').replace(/\'/g,'\"')}'#{@newline}"
 
 exports.getSaSS = (o)->
+  o = o or {}
   new SaSS(o)

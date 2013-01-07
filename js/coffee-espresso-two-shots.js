@@ -2,39 +2,42 @@
 (function() {
   var CoffeeEspressoTwoShots;
 
-  module.exports = CoffeeEspressoTwoShots = (function() {
+  CoffeeEspressoTwoShots = (function() {
 
-    function CoffeeEspressoTwoShots() {}
-
-    CoffeeEspressoTwoShots.prototype.render = function(s) {
-      var format, result;
-      format = this._inspector(s);
-      switch (format) {
-        case 'sass':
-          result = this.convertFromSaSS(s);
-          break;
-        case 'haml':
-          result = this.convertFromHaml(s);
-      }
-      return result;
-    };
-
-    CoffeeEspressoTwoShots.prototype._inspector = function(s) {
-      if (-1 < s.search(/%[\w]+$/)) {
-        return 'haml';
-      } else {
-        return 'sass';
-      }
-    };
-
-    CoffeeEspressoTwoShots.prototype.convertFromSaSS = function(s) {
-      var sass;
-      sass = require('../js/sass.js').getSaSS();
-      return sass.convert(s);
-    };
+    function CoffeeEspressoTwoShots() {
+      this.render = function(s, o) {
+        var format, result;
+        this.o = o || {};
+        format = this._inspector(s);
+        switch (format) {
+          case 'sass':
+            result = this.convertFromSaSS(s);
+            break;
+          case 'haml':
+            result = this.convertFromHaml(s);
+        }
+        return result;
+      };
+      this._inspector = function(s) {
+        if (-1 < s.search(/%[\w]+$/)) {
+          return 'haml';
+        } else {
+          return 'sass';
+        }
+      };
+      this.convertFromSaSS = function(s) {
+        var sass;
+        sass = require('../js/sass.js').getSaSS(this.o);
+        return sass.convert(s);
+      };
+    }
 
     return CoffeeEspressoTwoShots;
 
   })();
+
+  exports.getCoffeeEspressoTwoShots = function() {
+    return new CoffeeEspressoTwoShots;
+  };
 
 }).call(this);
