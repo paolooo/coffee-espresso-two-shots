@@ -21,7 +21,7 @@ class SaSS
     @_isImport = (s) ->
       s.search(/^@/) > -1
     @_isComment = (s) ->
-      if s.search(/\/+\**/) > -1
+      if s.search(/^\s*\/+\**/) > -1
         @_comment = true
       else if s.search(/^\s*\*/) > -1 and @_comment
         @_comment = true

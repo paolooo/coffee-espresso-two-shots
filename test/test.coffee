@@ -46,12 +46,14 @@ body.users_dashboard #stage.module-08
   .slide
     +sprite-bg($general, 'bg-blank-slide')
     height: 400px
+    background: url('modules/07/bg-slide-06.png') 0 0 no-repeat
       """
       output = """
 s 'body.users_dashboard #stage.module-08', ->
   s '.slide', ->
     sprite_bg general, 'bg-blank-slide'
     height '400px'
+    background 'url("modules/07/bg-slide-06.png") 0 0 no-repeat'
       """
 
     it 'can ignore this types ("/* and //") comments only', ->

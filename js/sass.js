@@ -41,7 +41,7 @@
         return s.search(/^@/) > -1;
       };
       this._isComment = function(s) {
-        if (s.search(/\/+\**/) > -1) {
+        if (s.search(/^\s*\/+\**/) > -1) {
           this._comment = true;
         } else if (s.search(/^\s*\*/) > -1 && this._comment) {
           this._comment = true;
