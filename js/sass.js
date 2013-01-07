@@ -26,7 +26,7 @@
           return s.replace(/\@import\s+/, '#=require ../') + (".css.coffee" + this.newline);
         }
         if (this._isComment(s)) {
-          return s.replace(/\/\*/, '//').replace(/\*/, '//') + this.newline;
+          return s.replace(/\/+\**/, '#').replace(/\*/, '#') + this.newline;
         }
         if (this._isSelector(s)) {
           return this._selector(s);

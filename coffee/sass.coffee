@@ -13,7 +13,7 @@ class SaSS
       @coffeeStyle.replace /[\n|\r|\r\n]$/, ''
     @_convert = (s) ->
       return s.replace(/\@import\s+/,'#=require ../') + ".css.coffee#{@newline}" if @_isImport s # @import
-      return s.replace(/\/\*/,'//').replace(/\*/,'//') + @newline if @_isComment s # ignore comment
+      return s.replace(/\/+\**/,'#').replace(/\*/,'#') + @newline if @_isComment s # ignore comment
       return if @_isSelector s then @_selector s else @_property s
     @_isSelector = (s) ->
     # diff between a tag and a selector is ':[\w]+' this is a pseudo-class, otherwise, it is a css property

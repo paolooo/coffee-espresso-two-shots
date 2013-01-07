@@ -64,8 +64,8 @@ s 'body.users_dashboard #stage.module-08', ->
 /* comment 3
       """
       output = """
-// comment 2
-// comment 3
+# comment 2
+# comment 3
       """
 
     it 'can convert @import', ->
