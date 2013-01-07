@@ -41,7 +41,7 @@
         }
       };
       this._isSelector = function(s) {
-        return s.search(/\:\s+[\w\"\'\#\d]+/) === -1 && s.search(/\+/) === -1;
+        return s.search(/\:\s+[\w\"\'\#\d\-]+/) === -1 && s.search(/\+/) === -1;
       };
       this._isImport = function(s) {
         return s.search(/^@/) > -1;
@@ -58,6 +58,7 @@
       };
       this._selector = function(s) {
         var r;
+        s = s.replace(/\'/g, '"');
         if (-1 < s.search(/\,$/)) {
           r = !this._isPrevSelectorWithComma ? s.replace(/(\s*)(.*)$/, "$1s '$2") : s.replace(/\s*(.*)$/, " $1");
           this._isPrevSelectorWithComma = true;

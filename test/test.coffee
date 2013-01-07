@@ -91,3 +91,19 @@ body.users_dashboard .module-07 th
 s 'body.users_dashboard .module-07, body.users_dashboard .module-07 table, body.users_dashboard .module-07 th', ->
   font_size '13px'
       """
+
+    it 'convert margin-top and attribute', ->
+      template = """
+label
+  margin-top: -15px
+  font-style: normal
+  &[for='m7-32-txt-reps']
+    margin-top: 9px
+      """
+      output = """
+s 'label', ->
+  margin_top '-15px'
+  font_style 'normal'
+  s '&[for="m7-32-txt-reps"]', ->
+    margin_top '9px'
+      """

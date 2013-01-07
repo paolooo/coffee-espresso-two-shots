@@ -24,7 +24,7 @@ class SaSS
       return if @_isSelector s then @_selector s else @_property s
     @_isSelector = (s) ->
     # diff between a tag and a selector is ':[\w]+' this is a pseudo-class, otherwise, it is a css property
-      return s.search(/\:\s+[\w\"\'\#\d]+/) is -1 and s.search(/\+/) is -1
+      return s.search(/\:\s+[\w\"\'\#\d\-]+/) is -1 and s.search(/\+/) is -1
     @_isImport = (s) ->
       s.search(/^@/) > -1
     @_isComment = (s) ->
@@ -36,6 +36,7 @@ class SaSS
         @_comment = false
       @_comment
     @_selector = (s) ->
+      s = s.replace /\'/g, '"'
       if -1 < s.search /\,$/
         r = unless @_isPrevSelectorWithComma then s.replace /(\s*)(.*)$/, "$1s '$2" else s.replace /\s*(.*)$/, " $1"
         @_isPrevSelectorWithComma = true
