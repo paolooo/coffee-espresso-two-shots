@@ -7,8 +7,10 @@
     function SaSS(o) {
       o = o || {};
       this.newline = o.newline || "\n";
+      this.debug = o.debug || false;
       this.coffeeStyle = '';
       this._comment = false;
+      this._isPrevSelectWithComma = false;
       this.convert = function(s) {
         var self;
         this.lines = s.split(/[\n|\r|\r\n]+/);
@@ -22,6 +24,9 @@
         return this.coffeeStyle.replace(/[\n|\r|\r\n]$/, '');
       };
       this._convert = function(s) {
+        if (o.debug) {
+          s = '#' + s;
+        }
         if (this._isImport(s)) {
           return s.replace(/\@import\s+/, '#=require ../') + (".css.coffee" + this.newline);
         }
@@ -41,7 +46,7 @@
         return s.search(/^@/) > -1;
       };
       this._isComment = function(s) {
-        if (s.search(/^\s*\/+\**/) > -1) {
+        if (s.search(/(\/\*+|\/\/)/) > -1) {
           this._comment = true;
         } else if (s.search(/^\s*\*/) > -1 && this._comment) {
           this._comment = true;
@@ -60,7 +65,7 @@
           return "" + (c[0].replace(/\+/, '').replace(/\-/g, '_')) + " " + (c[1].replace(/\"/g, '\'').replace(/\(/, ' ').replace(/\$/, '').replace(/\)/, '')) + this.newline;
         } else {
           c = s.split(':');
-          return "" + (c[0].replace(/\-/, '_')) + " '" + (c[1].replace(/^\s*/, '').replace(/\'/g, '\"')) + "'" + this.newline;
+          return "" + (c[0].replace(/\-/g, '_')) + " '" + (c[1].replace(/^\s*/, '').replace(/\'/g, '\"')) + "'" + this.newline;
         }
       };
     }

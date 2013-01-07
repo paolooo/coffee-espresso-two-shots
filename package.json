@@ -28,7 +28,7 @@
     "coffee-script": ">=1.4.0"
   },
   "scripts": {
-    "pretest": "coffee -o js coffee/coffee-espresso-two-shots.coffee",
+    "pretest": "coffee -o js coffee",
     "test": "mocha --compilers coffee:coffee-script -R spec --ui bdd --colors test/test.coffee"
   }
 }
