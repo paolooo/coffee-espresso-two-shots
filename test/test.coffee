@@ -107,3 +107,53 @@ s 'label', ->
   s '&[for="m7-32-txt-reps"]', ->
     margin_top '9px'
       """
+
+  describe 'Haml test', ->
+    afterEach ->
+      o = {}
+      o.format = 'haml'
+      result = engine.render template, o
+      assert.equal result, output
+
+    it 'can convert haml tag with attributes', ->
+      template = """
+%form{ :method => "post", :name => "form-type-1"}
+%input#m7{ :type => "text" }/
+      """
+      output = """
+form method:"post", name:"form-type-1", ->
+input '#m7', type:"text"
+      """
+
+    it 'can convert haml .class, #id, and %p#id.class', ->
+      template = """
+.class
+  div 1
+#id
+  div 2
+%p#id.class
+  p 1
+      """
+      output = """
+div '.class', ->
+  text \"div 1\"
+div '#id', ->
+  text \"div 2\"
+p '#id.class', ->
+  text \"p 1\"
+      """
+
+    it 'can detect haml comment', ->
+      template = """
+-# this is a comment
+/ this is a comment too
+  -# this is a comment 3
+  / this is a comment 4
+      """
+      output = """
+# this is a comment
+# this is a comment too
+  # this is a comment 3
+  # this is a comment 4
+      """
+

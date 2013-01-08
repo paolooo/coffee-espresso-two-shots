@@ -8,7 +8,7 @@
       this.render = function(s, o) {
         var format, result;
         this.o = o || {};
-        format = this._inspector(s);
+        format = this.o.format || this._inspector(s);
         switch (format) {
           case 'sass':
             result = this.convertFromSaSS(s);
@@ -29,6 +29,11 @@
         var sass;
         sass = require('../js/sass.js').getSaSS(this.o);
         return sass.convert(s);
+      };
+      this.convertFromHaml = function(s) {
+        var haml;
+        haml = require('../js/haml.js').getHaml(this.o);
+        return haml.convert(s);
       };
     }
 

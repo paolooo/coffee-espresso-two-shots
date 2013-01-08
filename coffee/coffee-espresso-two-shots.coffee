@@ -3,7 +3,8 @@ class CoffeeEspressoTwoShots
     @render = (s, o) ->
       # identify 's' if it is a haml or sass
       @o = o or {}
-      format = @_inspector s
+      # o.format = "sass|haml"
+      format = @o.format || @_inspector s
       switch format
         when 'sass' then result = @convertFromSaSS s
         when 'haml' then result = @convertFromHaml s
@@ -16,6 +17,10 @@ class CoffeeEspressoTwoShots
     @convertFromSaSS = (s) ->
       sass = require('../js/sass.js').getSaSS @o
       sass.convert s
+
+    @convertFromHaml = (s) ->
+      haml = require('../js/haml.js').getHaml @o
+      haml.convert s
 
 exports.getCoffeeEspressoTwoShots = ->
   new CoffeeEspressoTwoShots

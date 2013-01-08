@@ -12,8 +12,32 @@
 
   filename = process.argv[2];
 
-  if ((process.argv[3] != null) && process.argv[3] === '--debug') {
-    o.debug = true;
+  o.debug = false;
+
+  if (process.argv[3] != null) {
+    switch (process.argv[3]) {
+      case '--haml':
+        o.format = 'haml';
+        break;
+      case '--sass':
+        o.format = 'sass';
+        break;
+      case '--debug':
+        o.debug = true;
+    }
+  }
+
+  if (process.argv[4] != null) {
+    switch (process.argv[4]) {
+      case '--haml':
+        o.format = 'haml';
+        break;
+      case '--sass':
+        o.format = 'sass';
+        break;
+      case '--debug':
+        o.debug = true;
+    }
   }
 
   template = fs.readFileSync(filename, 'utf8');

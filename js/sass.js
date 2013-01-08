@@ -75,7 +75,7 @@
       };
       this._property = function(s) {
         var c;
-        if (s.search(/\+/) > -1) {
+        if (-1 < s.search(/\+/)) {
           c = s.split('(');
           return "" + (c[0].replace(/\+/, '').replace(/\-/g, '_')) + " " + (c[1].replace(/\"/g, '\'').replace(/\(/, ' ').replace(/\$/, '').replace(/\)/, '')) + this.newline;
         } else {
@@ -90,8 +90,7 @@
   })();
 
   exports.getSaSS = function(o) {
-    o = o || {};
-    return new SaSS(o);
+    return new SaSS(o || {});
   };
 
 }).call(this);

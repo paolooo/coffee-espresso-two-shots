@@ -50,7 +50,7 @@ class SaSS
         return s.replace /(\s*)(.*)$/, "$1s '$2', ->#{@newline}"
     @_property = (s) ->
       # is mixin
-      if s.search(/\+/) > -1
+      if -1 < s.search(/\+/)
         c = s.split '('
         return "#{c[0].replace(/\+/,'').replace(/\-/g,'_')} #{c[1].replace(/\"/g,'\'').replace(/\(/,' ').replace(/\$/,'').replace(/\)/,'')}#{@newline}"
       else
@@ -58,5 +58,4 @@ class SaSS
         return "#{c[0].replace(/\-/g,'_')} '#{c[1].replace(/^\s*/,'').replace(/\'/g,'\"')}'#{@newline}"
 
 exports.getSaSS = (o)->
-  o = o or {}
-  new SaSS(o)
+  new SaSS o or {}
