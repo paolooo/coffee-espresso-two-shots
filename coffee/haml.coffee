@@ -34,6 +34,7 @@ class Haml
       _with_attr = s.search(/\%\w+[\.\#\{]/) > -1
       _tag_only = s.search(/\%\w+[^\s]+$/) > -1
       _empty_tag = s.search(/\/\s*$/) > -1
+      _tag_with_content = s.search(/\%\w+\s+(.*)$/) > -1
       r = s.replace(/(\s*)\%(\w+)\s+(.*)$/, "$1$2 '$3'")
         .replace(/\:/g,'')
         .replace(/\s*\=>\s*/g,':')
@@ -44,6 +45,7 @@ class Haml
         .replace(/\{\s*/, ' ')
         .replace(/\%(\w+)/, '$1')
         .replace(/^(\s*)([\.\#])([\w\d\-\.\#\_]+)$/, "$1div '$2$3'")
+
       if _empty_tag
         r += @newline
       else if _with_content
@@ -52,6 +54,8 @@ class Haml
         r += ", ->#{@newline}"
       else if _tag_only
         r += " ->#{@newline}"
+      else if _tag_with_content
+        r += @newline
       else
         r += ", ->#{@newline}"
       r = '#' + r if @debug

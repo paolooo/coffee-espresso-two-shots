@@ -2,7 +2,7 @@ div '.slide.module-07-32', ->
   div '.inner-content', ->
     div '.content-1', ->
       form method:"post", name:"form-type-1", id:'form-7-32', ->
-        p 'Fill out how active you are in the forms below', ->
+        p 'Fill out how active you are in the forms below'
         div '.block-1.table-01', ->
           div '.inner', ->
             dl ->
@@ -21,7 +21,7 @@ div '.slide.module-07-32', ->
   div '.inner-content', ->
     div '.content-1', ->
       form method:"post", name:"form-type-1", id:'form-7-32', ->
-        p 'Fill out how active you are in the forms below', ->
+        p 'Fill out how active you are in the forms below'
         div '.block-1.table-01', ->
           div '.inner', ->
             dl ->
@@ -44,7 +44,7 @@ div '.slide.module-07-32', ->
                   input '#m7-32-txt-week-1', name:"m7_32_txt_week_1", type:"text", maxlength:1
             dl '.last', ->
               dt ->
-                p '# "#", 'of'', ->
+                p '# "#", 'of''
                 #%span.radio-type
                   #-#%span.radio-type-1
                 span '.wrap', ->
@@ -55,7 +55,7 @@ div '.slide.module-07-32', ->
                 span '.wrap', ->
                   input '#rd-2', name:"m7-32-rd-choice-1", type:"radio", value:'years'
                 label for:"rd-2", 'Years'
-                p 'you have been active', ->
+                p 'you have been active'
               dd '.editable', ->
                 span ->
                   input '#m7-32-txt-months-val-1', name:"m7_32_txt_months_val_1", type:"text", maxlength:2
@@ -87,7 +87,7 @@ div '.slide.module-07-32', ->
                   input '#m7-32-txt-week-2', name:"m7_32_txt_week_2", type:"text", maxlength:1
             dl '.last', ->
               dt ->
-                p '# "#", 'of'', ->
+                p '# "#", 'of''
                 #%span.radio-type
                   #-#%span.radio-type-1
                 span '.wrap', ->
@@ -98,7 +98,7 @@ div '.slide.module-07-32', ->
                 span '.wrap', ->
                   input '#rd-4', name:"m7-32-rd-choice-2", type:"radio", value:'years'
                 label for:"rd-4", 'Years'
-                p 'you have been active', ->
+                p 'you have been active'
               dd '.editable', ->
                 span ->
                   input '#m7-32-txt-months-val-2', name:"m7_32_txt_months_val_2", type:"text", maxlength:2
@@ -134,7 +134,7 @@ div '.slide.module-07-32', ->
                   input '#m7-32-txt-week-3', name:"m7_32_txt_week_3", type:"text", maxlength:1
             dl '.last', ->
               dt ->
-                p '# "#", 'of'', ->
+                p '# "#", 'of''
                 #%span.radio-type
                   #-#%span.radio-type-1
                 span '.wrap', ->
@@ -145,7 +145,7 @@ div '.slide.module-07-32', ->
                 span '.wrap', ->
                   input '#rd-6', name:"m7-32-rd-choice-3", type:"radio", value:'years'
                 label for:"rd-6", 'Years'
-                p 'you have been active', ->
+                p 'you have been active'
               dd '.editable', ->
                 span ->
                   input '#m7-32-txt-total-reps-val', name:"m7_32_txt_total_reps_val", type:"text", maxlength:2
@@ -161,7 +161,7 @@ div '.slide.module-07-32', ->
                   input '#m7-32-txt-week-1', name:"m7_32_txt_week_1", type:"text", maxlength:1
             dl '.last', ->
               dt ->
-                p '# "#", 'of'', ->
+                p '# "#", 'of''
                 #%span.radio-type
                   #-#%span.radio-type-1
                 span '.wrap', ->
@@ -172,7 +172,7 @@ div '.slide.module-07-32', ->
                 span '.wrap', ->
                   input '#rd-2', name:"m7-32-rd-choice-1", type:"radio", value:'years'
                 label for:"rd-2", 'Years'
-                p 'you have been active', ->
+                p 'you have been active'
               dd '.editable', ->
                 span ->
                   input '#m7-32-txt-months-val-1', name:"m7_32_txt_months_val_1", type:"text", maxlength:2
@@ -204,7 +204,7 @@ div '.slide.module-07-32', ->
                   input '#m7-32-txt-week-2', name:"m7_32_txt_week_2", type:"text", maxlength:1
             dl '.last', ->
               dt ->
-                p '# "#", 'of'', ->
+                p '# "#", 'of''
                 #%span.radio-type
                   #-#%span.radio-type-1
                 span '.wrap', ->
@@ -215,7 +215,7 @@ div '.slide.module-07-32', ->
                 span '.wrap', ->
                   input '#rd-4', name:"m7-32-rd-choice-2", type:"radio", value:'years'
                 label for:"rd-4", 'Years'
-                p 'you have been active', ->
+                p 'you have been active'
               dd '.editable', ->
                 span ->
                   input '#m7-32-txt-months-val-2', name:"m7_32_txt_months_val_2", type:"text", maxlength:2
@@ -251,7 +251,7 @@ div '.slide.module-07-32', ->
                   input '#m7-32-txt-week-3', name:"m7_32_txt_week_3", type:"text", maxlength:1
             dl '.last', ->
               dt ->
-                p '# "#", 'of'', ->
+                p '# "#", 'of''
                 #%span.radio-type
                   #-#%span.radio-type-1
                 span '.wrap', ->
@@ -262,7 +262,7 @@ div '.slide.module-07-32', ->
                 span '.wrap', ->
                   input '#rd-6', name:"m7-32-rd-choice-3", type:"radio", value:'years'
                 label for:"rd-6", 'Years'
-                p 'you have been active', ->
+                p 'you have been active'
               dd '.editable', ->
                 span ->
                   input '#m7-32-txt-total-reps-val', name:"m7_32_txt_total_reps_val", type:"text", maxlength:2
