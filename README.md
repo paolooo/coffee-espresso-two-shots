@@ -3,7 +3,7 @@
 $ npm install
 
 ## Run Test
-$ npm test\n
+$ npm test<br />
 or
 $ mocha --compilers coffee:coffee-script -R spec test/test
 
