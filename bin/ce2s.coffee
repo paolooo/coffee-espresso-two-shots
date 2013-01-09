@@ -1,10 +1,8 @@
-fs = require 'fs'
-assert = require('chai').assert
-engine = require('../js/coffee-espresso-two-shots.js').getCoffeeEspressoTwoShots()
-
-o = {}
+engine   = require '../js/coffee-espresso-two-shots.js'
+fs       = require 'fs'
+o        = {}
 filename = process.argv[2]
-o.debug = false
+o.debug  = false
 
 if process.argv[3]?
   switch process.argv[3]
@@ -21,7 +19,5 @@ if process.argv[4]?
 template = fs.readFileSync filename, 'utf8'
 result = engine.render template, o
 fs.writeFile filename + ".gen", result, (err) ->
-  if err
-    console.log err
-  else
-    console.log "==> " + filename + ".gen generated"
+  return console.log err if err
+  console.log "==> " + filename + ".gen generated"
