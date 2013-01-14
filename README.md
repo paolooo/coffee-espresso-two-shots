@@ -1,23 +1,32 @@
-# Coffee Espresso Two-Shots
+# Coffee Espresso Two Shots
 
-$ npm install
+    npm install coffee-espresso-two-shots -g
 
 ## Run Test
-$ npm test<br />
-or<br />
-$ mocha --compilers coffee:coffee-script -R spec test/test<br />
 
-## Run CLI to convert file from SaSS to coffee-stylesheet
-$ node js/cli.js test/module.css.coffee<br />
-or<br />
-$ node js/cli.js test/module.css.coffee --sass --debug<br />
-or<br />
-$ node js/cli.js test/module.css.coffee --debug<br />
+    npm test
 
-## Run CLI to convert file from HAML to coffee-template
-$ node js/cli.js test/test.html.haml<br />
-or<br />
-$ node js/cli.js test/test.html.haml --haml --debug<br />
-or<br />
-$ node js/cli.js test/test.html.haml --debug<br />
+## Run CLI to convert file from SASS to CoffeeStylesheets
+
+    ce2s test/module.css.coffee
+
+or
+
+    ce2s test/module.css.coffee --sass --debug
+
+or
+
+    ce2s test/module.css.coffee --debug
+
+## Run CLI to convert file from Haml to CoffeeTemplates
+
+    ce2s test/test.html.haml
+
+or
+
+    ce2s test/test.html.haml --haml --debug
+
+or
+
+    ce2s test/test.html.haml --debug
 
